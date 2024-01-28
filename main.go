@@ -28,7 +28,6 @@ func main() {
 	// Create a new UI instance
 	textUI := ui.NewUI(screen, textEditor)
 
-
 	// Start the event loop
 	textUI.EventLoop()
 }

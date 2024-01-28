@@ -21,7 +21,7 @@ func (e *Editor) InsertChar(char rune) {
 	if e.cursorPos < 0 {
 		e.cursorPos = 0
 	} else if e.cursorPos > len(e.buffer) {
-		e.cursorPos = len(e.buffer)
+		e.cursorPos = len(e.buffer) - 1
 	}
 
 	// Insert the character at the cursor position
@@ -36,8 +36,12 @@ func (e *Editor) DeleteChar() {
 		return
 	}
 
-	// Remove the character at the cursor position
-	e.buffer = append(e.buffer[:e.cursorPos], e.buffer[e.cursorPos+1:]...)
+	if e.cursorPos == len(e.buffer)-1 {
+		e.buffer = e.buffer[:e.cursorPos]
+	} else {
+		e.buffer = append(e.buffer[:e.cursorPos], e.buffer[e.cursorPos+1:]...)
+
+	}
 }
 
 // MoveCursorLeft moves the cursor to the left.
